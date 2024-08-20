@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 388eed1 (Initial commit)
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy, ExtractJwt } from 'passport-jwt';
@@ -15,6 +18,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: JwtPayload) {
+<<<<<<< HEAD
     const user = await this.usersService.findByUsername(payload.username);
     if (user) {
       return { id: user.id, username: user.username }; // Возвращаем объект с id и username
@@ -22,3 +26,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     return null;
   }
 }
+=======
+    return this.usersService.findByUsername(payload.username);
+  }
+}
+>>>>>>> 388eed1 (Initial commit)

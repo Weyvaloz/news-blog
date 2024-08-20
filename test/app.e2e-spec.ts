@@ -6,7 +6,11 @@ import { AppModule } from './../src/app.module';
 describe('AppController (e2e)', () => {
   let app: INestApplication;
 
+<<<<<<< HEAD
   beforeAll(async () => {
+=======
+  beforeEach(async () => {
+>>>>>>> 388eed1 (Initial commit)
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
@@ -21,6 +25,7 @@ describe('AppController (e2e)', () => {
       .expect(200)
       .expect('Hello World!');
   });
+<<<<<<< HEAD
 
   it('/auth/login (POST)', () => {
     return request(app.getHttpServer())
@@ -55,3 +60,6 @@ describe('AppController (e2e)', () => {
     await app.close();
   });
 });
+=======
+});
+>>>>>>> 388eed1 (Initial commit)
