@@ -13,14 +13,9 @@ export class PostsService {
     private usersRepository: Repository<User>,
   ) {}
 
-  async create( title: string, content: string, userId: number): Promise<Postentity> {
+  async create(post: Partial<Postentity>, userId: number): Promise<Postentity> {
     const user = await this.usersRepository.findOne({ where: { id: userId } });
-    const newPost = this.postsRepository.create({
-      title, 
-      content,
-      user: { id: userId}
-
-  });
+    const newPost = this.postsRepository.create(post);
     newPost.user = user;
     return this.postsRepository.save(newPost);
   }

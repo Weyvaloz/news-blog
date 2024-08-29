@@ -6,7 +6,7 @@ import { AppModule } from './../src/app.module';
 describe('AppController (e2e)', () => {
   let app: INestApplication;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
@@ -20,5 +20,38 @@ describe('AppController (e2e)', () => {
       .get('/')
       .expect(200)
       .expect('Hello World!');
+  });
+
+  it('/auth/login (POST)', () => {
+    return request(app.getHttpServer())
+      .post('/auth/login')
+      .send({ username: 'testuser', password: 'testpass' })
+      .expect(201) // Или другой ожидаемый статус
+      .expect(response => {
+        expect(response.body).toHaveProperty('access_token');
+      });
+  });
+
+  it('/users (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/users')
+      .expect(200)
+      .expect(response => {
+        expect(Array.isArray(response.body)).toBe(true);
+      });
+  });
+
+  it('/posts/create (POST)', () => {
+    return request(app.getHttpServer())
+      .post('/posts/create')
+      .send({ title: 'New Post', content: 'Post content', userId: 1 })
+      .expect(201)
+      .expect(response => {
+        expect(response.body).toHaveProperty('id');
+      });
+  });
+
+  afterAll(async () => {
+    await app.close();
   });
 });

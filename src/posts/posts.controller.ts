@@ -1,17 +1,17 @@
-import { Controller, Get, Post, Body, Param,  Req, UseGuards  } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, UseGuards, Request } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { Postentity } from '../posts/entities/post/post';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('posts')
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(AuthGuard('jwt'))
   @Post('create')
-  async create(@Body() body: { title: string; content: string;}, @Req() req: any) {
-    const userId = req.user.Id;
-    return this.postsService.create (body.title, body.content, userId);
+  create(@Body() body: { title: string; content: string }, @Request() req) {
+    const userId = req.user.id; 
+    return this.postsService.create({ title: body.title, content: body.content }, userId);
   }
 
   @Get()
