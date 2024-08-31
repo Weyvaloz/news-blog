@@ -9,11 +9,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
-<<<<<<< HEAD
   imports: [AuthModule, UsersModule, PostsModule,
-=======
-  imports: [AuthModule, UsersModule, PostsModule, 
->>>>>>> 388eed1 (Initial commit)
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -26,11 +22,8 @@ import { ConfigModule } from '@nestjs/config';
       synchronize: true,
     }),
   ],
-<<<<<<< HEAD
   controllers: [AppController],
   providers: [AppService]
-=======
->>>>>>> 388eed1 (Initial commit)
 
 })
 export class AppModule {};

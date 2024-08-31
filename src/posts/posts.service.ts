@@ -27,8 +27,4 @@ export class PostsService {
   findOne(id: number): Promise<Postentity> {
     return this.postsRepository.findOne({ where: { id }, relations: ['user'] });
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 388eed1 (Initial commit)
